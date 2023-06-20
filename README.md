@@ -9,6 +9,10 @@
 - 专业信息修改
 - 显示专业详细信息
 ![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20144336.png)
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20155238.png)
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20155302.png)
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20155249.png)
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20155238.png)
 ![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20144931.png)
 ![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20145004.png)
 ![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20145018.png)
