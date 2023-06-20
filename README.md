@@ -14,6 +14,8 @@
 <img width="1233" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/ad94ce6d-653b-441d-a2a7-82e16161b98a">
 <img width="578" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/3ae47549-8197-4f37-9159-6c88c8a865c6">
 <img width="1052" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/2c69b66d-8a14-41e2-b45f-afcacf10ccea">
+
+
 ```sql
 
 create table college
