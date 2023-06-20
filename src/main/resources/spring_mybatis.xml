@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 引入db.properties文件引入到配置文件中 -->
+    <context:property-placeholder location="classpath*:db.properties"></context:property-placeholder>
+    <!-- 配置数据源:(数据库链接池)
+         JNDI:   DBCP:  C3P0:
+         DRUID:阿里巴巴
+     -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <!-- 链接数据库的路径 -->
+        <property name="url" value="${mysql.url}"></property>
+        <!-- 数据库链接的账号 -->
+        <property name="username" value="${mysql.username}"></property>
+        <!-- 数据库链接的密码 -->
+        <property name="password" value="${mysql.password}"></property>
+        <!-- 数据库链接的驱动 -->
+        <property name="driverClassName" value="${mysql.driver}"></property>
+        <!-- 数据库的最大连接数 -->
+        <property name="maxActive" value="${druid.maxActive}"></property>
+        <!-- 数据库的最小开启数量 -->
+        <property name="minIdle" value="${druid.minIdle}"></property>
+        <!-- 关闭连接后不自动commit -->
+        <property name="defaultAutoCommit" value="${druid.defaultAutoCommit}"></property>
+        <!-- 获取连接超时时间10000毫秒 -->
+        <property name="maxWait" value="${druid.maxWait}"></property>
+    </bean>
+    <!--创建SqlsessionFactoryBean工厂对象（数据源工厂）-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--加载数据源-->
+        <property name="dataSource"  ref="dataSource"/>
+        <!--读取mybatis文件-->
+        <!--<property name="configLocation" value="classpath:mybatis.xml"/>-->
+        <!--读取mapper映射文件-->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"/>
+        <!--简化实体类包名-->
+        <property name="typeAliasesPackage" value="com.ssm.pojo"/>
+    </bean>
+    <!-- 配置扫描包:扫描接口的代理对象。(创建代理对象) -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注入功能接口的包 -->
+        <property name="basePackage" value="com.ssm.dao"></property>
+    </bean>
+    <!-- 开启注解: -->
+    <context:component-scan base-package="com.ssm.service"></context:component-scan>
+    <!-- 声明式事务: -->
+    <!-- AOP配置声明式事务: -->
+    <!-- 创建一个事务管理器的对象: -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据源 -->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 增强设置: -->
+    <tx:advice id="txAdvice">
+        <tx:attributes>
+            <!-- propagation:传播行为   isolation:隔离级别 -->
+            <tx:method name="get*()" propagation="SUPPORTS" isolation="SERIALIZABLE"/>
+            <tx:method name="add*()" propagation="REQUIRED"/>
+            <tx:method name="del*()" propagation="REQUIRED"/>
+            <tx:method name="update*()" propagation="REQUIRED"/>
+            <tx:method name="*()" propagation="REQUIRED"></tx:method>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 设置切面: -->
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* com.ssm..*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"></aop:advisor>
+    </aop:config>
+    <!-- 开启注解 -->
+    <!-- <aop:aspectj-autoproxy/>-->
+</beans>

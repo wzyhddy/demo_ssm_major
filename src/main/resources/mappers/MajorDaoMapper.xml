@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 映射文件: -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.MajorDao">
+    <!-- 手动映射: -->
+    <resultMap id="majorMap" type="com.ssm.pojo.Major">
+        <id property="mid" column="cid"></id>
+        <result property="mname" column="mname"></result>
+        <result property="credit" column="credit"></result>
+        <result property="lifeyear" column="LifeYear"></result>
+        <result property="introduction" column="introduction"></result>
+    </resultMap>
+    <!-- 专业信息的录入: -->
+    <insert id="addMajor" parameterType="Major">
+        insert into major(mname, credit, LifeYear, introduction, cid)
+        values (#{mname}, #{credit}, #{lifeyear}, #{introduction}, #{cid})
+    </insert>
+<!--    更新语句-->
+    <update id="updateMajor">
+        update major
+        set mname=#{mname},
+            credit=#{credit},
+            lifeyear=#{lifeyear},
+            introduction=#{introduction},
+            cid=#{cid}
+        where mid = #{mid}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from major
+        where mid = #{id}
+    </delete>
+
+    <!--专业信息模糊查询-->
+    <select id="findByNameLike" parameterType="String" resultType="com.ssm.pojo.Major">
+        select *
+        from major m
+        where m.mname like concat('%', #{val}, '%');
+
+    </select>
+    <!--两表联查的sql语句-->
+    <select id="getMajorListWithCollege" resultMap="majorWithCollege">
+        SELECT major.*, college.cname
+        FROM major
+                 JOIN college ON major.cid = college.cid;
+    </select>
+
+    <!-- 动态模糊查询的sql语句-->
+    <select id="search" resultMap="search">
+        select * from major m
+        inner join college c ON m.cid = c.cid
+        <where>
+            <if test="creditFrom != null">
+                AND m.credit &gt;= #{creditFrom}
+            </if>
+            <if test="creditTo != null">
+                AND m.credit &lt;= #{creditTo}
+            </if>
+            <if test="cname != null and cname!=''">
+                AND c.cname like CONCAT('%',#{cname},'%')
+            </if>
+            <if test="mname!= null and mname !=''">
+                AND m.mname like CONCAT('%',#{mname},'%')
+            </if>
+        </where>
+    </select>
+    <!-- 获取专业详情的sql语句 只有一个对象 需要用到多表联查需要resultMap类型-->
+    <select id="detail" resultMap="majorWithCollege">
+        SELECT m.*, c.cname
+        FROM major AS m
+                 JOIN college AS c ON m.cid = c.cid
+        WHERE m.mid = #{mid};
+    </select>
+
+    <!--    分页显示的sql语句-->
+    <select id="getPage" resultMap="majorWithCollege">
+        SELECT major.*, college.cname
+        FROM major
+                 JOIN college ON major.cid = college.cid LIMIT #{index}, #{pageSize};
+    </select>
+
+
+    <!-- 嵌套子查询 返回总数 count-->
+    <select id="counts" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM (SELECT major.*, college.cname
+              FROM major
+                       JOIN college ON major.cid = college.cid) AS subquery;
+    </select>
+    <select id="getMajorById" resultMap="majorWithCollege">
+        SELECT m.*, c.cname
+        FROM major AS m
+                 JOIN college AS c ON m.cid = c.cid
+        WHERE m.mid = #{mid};
+    </select>
+
+<!--Map映射对象-->
+    <resultMap id="search" type="major">
+        <id property="mid" column="mid"/>
+        <result property="mname" column="mname"/>
+        <result column="credit" property="credit"/>
+        <result property="lifeyear" column="lifeyear"/>
+        <result property="introduction" column="introduction"/>
+        <association property="college" javaType="College">
+            <id column="cid" property="cid"/>
+            <result column="cname" property="cname"/>
+        </association>
+    </resultMap>
+    <resultMap id="majorWithCollege" type="Major">
+        <id property="mid" column="mid"/>
+        <result property="mname" column="mname"/>
+        <result property="lifeyear" column="lifeyear"/>
+        <result property="introduction" column="introduction"/>
+        <result property="credit" column="credit"/>
+        <association property="college" javaType="College">
+            <id property="cid" column="cid"/>
+            <result property="cname" column="cname"/>
+        </association>
+    </resultMap>
+</mapper>

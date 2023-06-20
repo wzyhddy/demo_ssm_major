@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 创建一个controller对象 -->
+    <!--  <bean name="/userController" class="com.spring.controller.UserController"></bean>-->
+    <!-- 声明开启注解 -->
+    <context:component-scan base-package="com.ssm"/>
+    <!-- 加载注解驱动: -->
+    <mvc:annotation-driven/>
+    <!-- 释放静态资源:图片  css html js -->
+    <mvc:default-servlet-handler/>
+    <!-- 视图解析器: -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 视图页面的前缀
+         :/success.jsp-->
+        <property name="prefix" value="/"></property>
+        <!-- 试图页面的后缀 -->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <!-- 配置文件上传解析器: -->
+    <bean  id="multipartResolver"
+           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 上传文件的总大小 -->
+        <property name="maxUploadSize" value="5242800"></property>
+        <!-- 上传文件的临时目录 -->
+        <property name="uploadTempDir" value="/"></property>
+        <!-- 上传文件的字符集编码 -->
+        <property name="defaultEncoding" value="utf-8"></property>
+    </bean>
+    <!-- 配置拦截器: -->
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            &lt;!&ndash;对哪些资源执行拦截操作&ndash;&gt;
+            <mvc:mapping path="/**"/>
+            &lt;!&ndash; 对登录请求放行&ndash;&gt;
+            <mvc:exclude-mapping path="/user/login"></mvc:exclude-mapping>
+            <bean class="com.ssm.interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+</beans>
