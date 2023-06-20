@@ -8,13 +8,11 @@
 - 专业信息删除
 - 专业信息修改
 - 显示专业详细信息
-<img width="664" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/0a4a0180-5730-4743-8adb-43d9f4bebc39">
-<img width="1232" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/de847895-1073-48fe-9d1c-0d50dd97ead5">
-<img width="1223" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/2634ea88-d211-47b5-b8e0-90a30e558eb5">
-<img width="1233" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/ad94ce6d-653b-441d-a2a7-82e16161b98a">
-<img width="578" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/3ae47549-8197-4f37-9159-6c88c8a865c6">
-<img width="1052" alt="image" src="https://github.com/wzyhddy/demo_ssm_major/assets/93774961/2c69b66d-8a14-41e2-b45f-afcacf10ccea">
-
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20144336.png)
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20144931.png)
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20145004.png)
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20145018.png)
+![](https://raw.githubusercontent.com/wzyhddy/image/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-06-20%20145031.png)
 
 ```sql
 
